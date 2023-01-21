@@ -9,8 +9,7 @@
 struct Customer {
     char name[MAX_NAME_LENGTH];
     char mobileNumber[15];
-    float amountDue;
-    float amountPaid;
+    float totalAmount;
     char itemsPurchased[MAX_ITEMS][MAX_NAME_LENGTH];
     int numItems;
 };
@@ -34,11 +33,9 @@ void addCustomer(FILE *file, struct Customer *customers, int *numCustomers) {
         scanf("%s", newCustomer.itemsPurchased[i]);
     }
 
-    printf("Enter amount due: ");
-    scanf("%f", &newCustomer.amountDue);
+    printf("Enter Total amount: ");
+    scanf("%f", &newCustomer.totalAmount);
 
-    printf("Enter amount paid: ");
-    scanf("%f", &newCustomer.amountPaid);
 
     // Append the new customer to the end of the file
     fseek(file, 0, SEEK_END);
@@ -62,9 +59,7 @@ void displayCustomers(struct Customer *customers, int numCustomers) {
         for (int j = 0; j < customers[i].numItems; j++) {
             printf("  %s\n", customers[i].itemsPurchased[j]);
         }
-        printf("Amount Due: %.2f\n", customers[i].amountDue);
-        printf("Amount Paid: %.2f\n", customers[i].amountPaid);
-        printf("\n");
+        printf("Amount Due: %.2f\n", customers[i].totalAmount);
     }
 }
 
